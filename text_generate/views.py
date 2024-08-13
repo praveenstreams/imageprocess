@@ -17,6 +17,7 @@ class ImageTextGenerate(TemplateView):
             'jpg', 'jpeg', 'png', 'gif', 'bmp',
             'tiff', 'webp', 'heif', 'ico', 'svg', 'raw', 'exr'
         ]
+
         image = request.FILES.get('file')
         if image.name.split('.')[-1] not in image_file_extensions:
             return render(request, 'home.html', {'status': 'Not an image file!'})
