@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .upload-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #6c63ff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+
+        .file-upload:hover {
+            background-color: #5848c2;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #ff6584;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+
+        .submit-btn:hover {
+            background-color: #d93e60;
+        }
+
+        .filename {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333333;
+            word-wrap: break-word;
+        }
+        .color-green{
+            color: darkblue;
+        }
+        .popup-background{
+            background-color: antiquewhite;
+            border-radius: 4px;
+            align-content: center;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+
+        <form action="#" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="file-upload">
+                Choose File
+                <input type="file" name="file" onchange="showFileName(this)" />
+            </label>
+            <div class="filename" id="filename">No file chosen</div>
+            <button type="submit" class="submit-btn">Submit</button>
+            {% if status %}
+                <div class="popup-background">
+                    <p class="color-green">{{ status }}</p>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <script>
+        function showFileName(input) {
+            const filenameDisplay = document.getElementById('filename');
+            filenameDisplay.textContent = input.files.length > 0 ? input.files[0].name : 'No file chosen';
+        }
+    </script>
+</body>
+</html>
